@@ -1,6 +1,8 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [stado, setStado] = useState
   return (
     <div>
       <h1>Battleship!</h1>
