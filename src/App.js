@@ -21,7 +21,7 @@ function App() {
     "Acorazado(4 casillas)": { size: 4, name: "Acorazado", color: "#00FF00" },
     "Destructor(3 casillas)": { size: 3, name: "Destructor", color: "#fafe00" },
     "Submarino(3 casillas)": { size: 3, name: "Submarino", color: "#FFA500" },
-    "crucero(2 casillas)": { size: 2, name: "Crucero", color: "#808080" }
+    "Crucero(2 casillas)": { size: 2, name: "Crucero", color: "#808080" }
   };
 
   const placeOpponentShips = () => {
@@ -255,6 +255,14 @@ function App() {
         </div>
       </div>
       
+      <button 
+        type="button" 
+        className="btn btn-secondary mt-2 mb-2"
+        onClick={toggleOrientation}
+      >
+        Orientación: {isHorizontal ? 'Horizontal' : 'Vertical'}
+      </button>
+      
       <div className="col-md-4">
         <label htmlFor="inputState" className="form-label">Selecciona el barco</label>
         <select 
@@ -275,14 +283,8 @@ function App() {
           ))}
         </select>
       </div>
-      <button 
-        type="button" 
-        className="btn btn-secondary mt-2 mb-2"
-        onClick={toggleOrientation}
-      >
-        Orientación: {isHorizontal ? 'Horizontal' : 'Vertical'}
-      </button>
       
+      <br/>
       <button 
         type="button" 
         className="btn btn-danger mt-2"
