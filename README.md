@@ -30,7 +30,7 @@ Luego escibes
 Abrir el navegador y escibir esta dirección [http://localhost:3000](http://localhost:3000).
 
 ## Como deterner el juego
-### `npm stop`
+### `Tecla control + Tecla C`
 
 ### 
 Cualquier duda o consulta puedes hacerlo a través de mi mail, pedrobrice91@gmail.com.
