@@ -1,9 +1,12 @@
 COMIENZO DEL JUEGO
+
 1 • Cada jugador coloca sus barcos horizontal o verticalmente (no en diagonal) sobre su
 base insertando los pibotes en los agujeros de la misma.
 
 COMIENZA EL COMBATE
+
 1 • El jugador abre el fuego tratando de alcanzar un barco enemigo, luego lo hará su contrincante y así sucesivamente.
+
 2 • El disparo es anunciado con una Letra y un Número que corresponden a un agujero del
 tablero enemigo localizado por la convergencia entre la Letra y el Número de su base.
 3 • El atacado deberá informar su situación: "TOCADO", si el disparo fue certero ó
@@ -11,6 +14,7 @@ tablero enemigo localizado por la convergencia entre la Letra y el Número de su
 etc).
 
 MARCACIÓN
+
 1 • Después que el jugador haya efectuado el disparo y sepa si ha acertado o no, colocará
 una ficha en su pantalla, blanca en los disparos errados y amarilla en los aciertos, ésto le
 servirá de referencia y evitará repetir los disparos a los mismos puntos.
