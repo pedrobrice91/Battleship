@@ -28,5 +28,5 @@ abrir el navegador y escibir esta dirección [http://localhost:3000](http://loca
 ## Como deterner el juego
 ### `npm stop`
 
-
+### 
 Cualquier duda o consulta puedes hacerlo a través de mi mail, pedrobrice91@gmail.com.
