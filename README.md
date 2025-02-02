@@ -6,17 +6,18 @@ Para jugar a Batalla Naval, cada jugador debe colocar sus barcos en un tablero y
 
 COMIENZO DEL JUEGO
 
-1 • Cada jugador coloca sus barcos horizontal o verticalmente (no en diagonal).
+1 • Cada jugador coloca la orientacion de sus barcos; Horizontal o verticalmente (no en diagonal), piensa bien donde posicionarlos, una vez seleccionada la casilla donde dejas tu barco no podras cambiarla.
 
 COMIENZA EL COMBATE
 
-1 • El jugador abre el fuego tratando de alcanzar un barco enemigo, luego lo hará su contrincante y así sucesivamente.
+1 • El jugador abre el fuego tratando de alcanzar un barco enemigo, debes hacerlo en el Tablero de Ataques has click en el cuadro que quieres atacar Fila columna, si este se pinta de color azul es que fallaste tu tiro, pero si cambia de color rojo quiere decir que le diste a un barco, recuerda que es un ataque por turno, una vez realizado el ataque luego lo hará su contrincante y así sucesivamente.
 
-2 • El disparo es anunciado con una Letra y un Número que corresponden al tablero enemigo localizado en el tablero superior.
+
+2 • El disparo el ataque de tu contrincante (LA MAQUINA), debes simularlo desde el boton con el nombre "Simular ataque del contrincante".
 
 HUNDIR LOS BARCOS
 
-1 • Cuando un barco haya recibido tantos impactos como casillas tiene, se considera "HUNDIDO" y deberá ser retirado de la base debiendo ser anunciado al oponente.
+1 • Cuando un barco haya recibido tantos impactos como casillas tiene, se considera "HUNDIDO".
 
 2 • Será ganador el primer jugador que hunda los cinco barcos de su oponente.
 
