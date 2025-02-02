@@ -15,44 +15,58 @@ function App() {
   const [playerBoard, setPlayerBoard] = useState(Array(9).fill().map(() => Array(10).fill(null)));
   const [attackBoard, setAttackBoard] = useState(Array(9).fill().map(() => Array(10).fill(null)));
   
-  // Estado para los ataques recibidos
-  const [receivedAttacks, setReceivedAttacks] = useState(Array(9).fill().map(() => Array(10).fill(false)));
+  // Estado para los ataques recibidos en "Mi Tablero"
+  const [receivedAttacks, setReceivedAttacks] = useState(Array(9).fill().map(() => Array(10).fill(null)));
 
   // Estado para barcos colocados
   const [placedShips, setPlacedShips] = useState([]);
 
   // Definición de barcos y sus colores
   const ships = {
-    "PortaAvion(5 casillas)": { size: 5, name: "PortaAvion", color: "#FF0000" }, // Rojo
+    "PortaAvion(5 casillas)": { size: 5, name: "PortaAvion", color: "#000000" }, // Rojo
     "Acorazado(4 casillas)": { size: 4, name: "Acorazado", color: "#00FF00" }, // Verde
-    "Destructor (3 casillas)": { size: 3, name: "Destructor", color: "#800080" }, // Púrpura
+    "Destructor (3 casillas)": { size: 3, name: "Destructor", color: "#fafe00" }, // Púrpura
     "Submarino(3 casillas)": { size: 3, name: "Submarino", color: "#FFA500" }, // Naranja
     "crucero(2 casillas)": { size: 2, name: "Crucero", color: "#808080" } // Gris
   };
 
   const handleShipSelect = (e) => {
     const shipName = e.target.value;
+    if (shipName === '') {
+      setSelectedShip({ type: '', size: 0 });
+      return;
+    }
+    
     if (placedShips.includes(shipName)) {
       alert('Este barco ya ha sido colocado');
+      setSelectedShip({ type: '', size: 0 });
       e.target.value = '';
       return;
     }
-    setSelectedShip({
-      type: shipName,
-      size: ships[shipName]?.size || 0
-    });
+
+    const ship = ships[shipName];
+    if (ship) {
+      setSelectedShip({
+        type: shipName,
+        size: ship.size
+      });
+    }
   };
 
-  // Manejo de ataques en el tablero superior
+  // Manejo de ataques en el tablero de ataques (sin cambios)
   const handleAttack = (row, col) => {
     const newAttackBoard = [...attackBoard];
-    const newReceivedAttacks = [...receivedAttacks];
-    
-    // Simulación de ataque (aquí conectarías con la lógica del oponente)
-    const isHit = Math.random() < 0.5; // Simulación
-    
+    const isHit = Math.random() < 0.5; // Simulación de ataque
     newAttackBoard[row][col] = isHit ? 'hit' : 'miss';
     setAttackBoard(newAttackBoard);
+  };
+
+  // Simulación de ataque del contrincante en "Mi Tablero"
+  const handleReceivedAttack = (row, col) => {
+    const newReceivedAttacks = [...receivedAttacks];
+    const isHit = playerBoard[row][col] !== null; // Verifica si hay un barco en la celda
+    newReceivedAttacks[row][col] = isHit ? 'hit' : 'miss';
+    setReceivedAttacks(newReceivedAttacks);
   };
 
   // Manejo de click en celda para colocar barcos
@@ -100,7 +114,10 @@ function App() {
     setPlayerBoard(newBoard);
     setPlacedShips([...placedShips, selectedShip.type]);
     setSelectedShip({ type: '', size: 0 });
-    document.getElementById('inputState').value = '';
+    const selectElement = document.getElementById('inputState');
+    if (selectElement) {
+      selectElement.value = '';
+    }
   };
 
   const toggleOrientation = () => {
@@ -109,7 +126,7 @@ function App() {
 
   const indexToLetter = (index) => String.fromCharCode(65 + index);
 
-  // Renderizado del tablero de ataques
+  // Renderizado del tablero de ataques (sin cambios)
   const renderAttackBoard = () => {
     return (
       <div>
@@ -140,7 +157,7 @@ function App() {
     );
   };
 
-  // Renderizado del tablero del jugador
+  // Renderizado del tablero del jugador con ataques recibidos
   const renderPlayerBoard = () => {
     return (
       <div>
@@ -163,8 +180,11 @@ function App() {
                   backgroundColor: playerBoard[rowIndex][colIndex] 
                     ? ships[playerBoard[rowIndex][colIndex]].color 
                     : '',
-                  ...(receivedAttacks[rowIndex][colIndex] && {
-                    backgroundColor: playerBoard[rowIndex][colIndex] ? '#FFD700' : '#0000FF'
+                  ...(receivedAttacks[rowIndex][colIndex] === 'hit' && {
+                    backgroundColor: '#FF0000' // Color para acierto
+                  }),
+                  ...(receivedAttacks[rowIndex][colIndex] === 'miss' && {
+                    backgroundColor: '#00aaff'   // Color para fallo
                   })
                 }}
                 onClick={() => handleCellClick(rowIndex, colIndex)}
@@ -174,6 +194,13 @@ function App() {
         ))}
       </div>
     );
+  };
+
+  // Simulación de ataque del contrincante
+  const simulateOpponentAttack = () => {
+    const row = Math.floor(Math.random() * 9);
+    const col = Math.floor(Math.random() * 10);
+    handleReceivedAttack(row, col);
   };
 
   return (
@@ -192,6 +219,7 @@ function App() {
         <select 
           id="inputState" 
           className="form-select"
+          value={selectedShip.type}
           onChange={handleShipSelect}
         >
           <option value="">Choose...</option>
@@ -213,15 +241,14 @@ function App() {
       >
         Orientación: {isHorizontal ? 'Horizontal' : 'Vertical'}
       </button>
-      <div className="col-md-6">
-        <label htmlFor="inputCity" className="form-label">columna</label>
-        <input type="text" className="form-control" id="inputCity"/>
-      </div>
-      <div className="col-md-6">
-        <label htmlFor="inputCity" className="form-label">fila</label>
-        <input type="text" className="form-control" id="inputCity"/>
-      </div>
-      <button type="button" className="btn btn-success">Atacar</button>
+      
+      <button 
+        type="button" 
+        className="btn btn-danger mt-2"
+        onClick={simulateOpponentAttack}
+      >
+        Simular ataque del contrincante
+      </button>
     </div>
   );
 }
