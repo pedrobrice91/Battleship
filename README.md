@@ -22,9 +22,12 @@ HUNDIR LOS BARCOS
 2 • Será ganador el primer jugador que hunda los cinco barcos de su oponente.
 
 ## Como correr el juego
-### `npm start`
+Una vez clonado este repositorio debes abrir la carpeta con tu IDE de preferencia y abrir la terminal.
 
-abrir el navegador y escibir esta dirección [http://localhost:3000](http://localhost:3000).
+Luego escibes  
+### `npm start` para levantar el juego
+
+Abrir el navegador y escibir esta dirección [http://localhost:3000](http://localhost:3000).
 
 ## Como deterner el juego
 ### `npm stop`
