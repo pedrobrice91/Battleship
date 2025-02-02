@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  // Previous states remain the same
+
   const [selectedShip, setSelectedShip] = useState({
     type: '',
     size: 0
@@ -13,18 +13,17 @@ function App() {
   const [receivedAttacks, setReceivedAttacks] = useState(Array(9).fill().map(() => Array(10).fill(null)));
   const [placedShips, setPlacedShips] = useState([]);
   
-  // New state for opponent's hidden ships
+
   const [opponentBoard, setOpponentBoard] = useState(Array(9).fill().map(() => Array(10).fill(null)));
 
   const ships = {
     "PortaAvion(5 casillas)": { size: 5, name: "PortaAvion", color: "#000000" },
     "Acorazado(4 casillas)": { size: 4, name: "Acorazado", color: "#00FF00" },
-    "Destructor (3 casillas)": { size: 3, name: "Destructor", color: "#fafe00" },
+    "Destructor(3 casillas)": { size: 3, name: "Destructor", color: "#fafe00" },
     "Submarino(3 casillas)": { size: 3, name: "Submarino", color: "#FFA500" },
     "crucero(2 casillas)": { size: 2, name: "Crucero", color: "#808080" }
   };
 
-  // Function to randomly place opponent's ships
   const placeOpponentShips = () => {
     const newBoard = Array(9).fill().map(() => Array(10).fill(null));
     
@@ -35,11 +34,10 @@ function App() {
         const row = Math.floor(Math.random() * 9);
         const col = Math.floor(Math.random() * 10);
         
-        // Check if ship fits in this position
+    
         if (isHorizontal && col + shipData.size > 10) continue;
         if (!isHorizontal && row + shipData.size > 9) continue;
-        
-        // Check if space is free
+      
         let spaceIsFree = true;
         for (let i = 0; i < shipData.size; i++) {
           if (isHorizontal) {
@@ -56,7 +54,7 @@ function App() {
         }
         
         if (spaceIsFree) {
-          // Place the ship
+       
           for (let i = 0; i < shipData.size; i++) {
             if (isHorizontal) {
               newBoard[row][col + i] = shipName;
@@ -72,15 +70,14 @@ function App() {
     setOpponentBoard(newBoard);
   };
 
-  // Initialize opponent's board when component mounts
+
   useEffect(() => {
     placeOpponentShips();
   }, []);
 
-  // Modified attack handler
   const handleAttack = (row, col) => {
     if (attackBoard[row][col] !== null) {
-      return; // Cell already attacked
+      return;
     }
 
     const newAttackBoard = [...attackBoard];
@@ -89,7 +86,6 @@ function App() {
     setAttackBoard(newAttackBoard);
   };
 
-  // Previous handlers remain the same
   const handleShipSelect = (e) => {
     const shipName = e.target.value;
     if (shipName === '') {
@@ -113,7 +109,6 @@ function App() {
     }
   };
 
-  // Modified attack board render function
   const renderAttackBoard = () => {
     return (
       <div>
@@ -144,7 +139,6 @@ function App() {
     );
   };
 
-  // Rest of the component remains the same
   const handleReceivedAttack = (row, col) => {
     const newReceivedAttacks = [...receivedAttacks];
     const isHit = playerBoard[row][col] !== null;
